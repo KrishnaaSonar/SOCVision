@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Database (contains generated data, not source code)
+socvision.db
+
+# Exported reports
+exports/
+
+# Virtual environment if you use one
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
