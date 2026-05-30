@@ -1,17 +1,22 @@
 # Python cache
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
 
-# Database (contains generated data, not source code)
-socvision.db
+# Database
+*.db
+*.sqlite3
 
 # Exported reports
 exports/
 
-# Virtual environment if you use one
+# Virtual environments
 venv/
 env/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
 
 # OS files
 .DS_Store
