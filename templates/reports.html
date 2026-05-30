@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block page_title %}Security Reports{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Security Reports</h1>
+    <p class="page-subtitle">Generated: {{ report.generated_at }}</p>
+</div>
+
+<!-- Period Selector -->
+<div class="period-selector">
+    <a href="/reports?period=daily" class="period-btn {% if report.period == 'daily' %}active{% endif %}">Daily</a>
+    <a href="/reports?period=weekly" class="period-btn {% if report.period == 'weekly' %}active{% endif %}">Weekly</a>
+    <a href="/reports?period=monthly" class="period-btn {% if report.period == 'monthly' %}active{% endif %}">Monthly</a>
+</div>
+
+<!-- Export Buttons -->
+<div class="export-bar">
+    <a href="/reports/export/csv?period={{ report.period }}" class="export-btn">⬇ Export CSV</a>
+    <a href="/reports/export/txt?period={{ report.period }}" class="export-btn">⬇ Export TXT</a>
+</div>
+
+<!-- Report Summary -->
+<div class="report-grid">
+    <div class="report-metric">
+        <div class="rm-value blue">{{ report.total_events }}</div>
+        <div class="rm-label">Total Events</div>
+    </div>
+    <div class="report-metric">
+        <div class="rm-value orange">{{ report.total_alerts }}</div>
+        <div class="rm-label">Total Alerts</div>
+    </div>
+    <div class="report-metric">
+        <div class="rm-value red">{{ report.critical_alerts }}</div>
+        <div class="rm-label">Critical Alerts</div>
+    </div>
+</div>
+
+<!-- Top IPs -->
+<div class="panels-row">
+    <div class="panel">
+        <div class="panel-header"><span>⊕ Top Suspicious IPs</span></div>
+        <div class="panel-body">
+            {% if report.top_ips %}
+            <table class="data-table mini-table">
+                <thead>
+                    <tr><th>IP Address</th><th>Alert Count</th></tr>
+                </thead>
+                <tbody>
+                    {% for ip in report.top_ips %}
+                    <tr>
+                        <td class="mono">{{ ip.ip }}</td>
+                        <td><span class="badge badge-high">{{ ip.c }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="empty-msg">No data for this period.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header"><span>◈ Threat Summary</span></div>
+        <div class="panel-body">
+            {% if report.threat_summary %}
+            <table class="data-table mini-table">
+                <thead>
+                    <tr><th>Threat Type</th><th>Count</th></tr>
+                </thead>
+                <tbody>
+                    {% for t in report.threat_summary %}
+                    <tr>
+                        <td>{{ t.alert_type }}</td>
+                        <td><span class="badge badge-medium">{{ t.c }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="empty-msg">No threats detected in this period.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

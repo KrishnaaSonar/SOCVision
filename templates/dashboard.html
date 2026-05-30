@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block page_title %}Dashboard Overview{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Security Overview</h1>
+    <p class="page-subtitle">Real-time monitoring • Threat detection • Incident tracking</p>
+</div>
+
+<!-- Metrics Grid -->
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-icon blue">◈</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ "{:,}".format(metrics.total_logs) }}</div>
+            <div class="metric-label">Total Logs</div>
+        </div>
+        <div class="metric-bar blue"></div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon orange">⚑</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ "{:,}".format(metrics.total_alerts) }}</div>
+            <div class="metric-label">Total Alerts</div>
+        </div>
+        <div class="metric-bar orange"></div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon red">⚠</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ metrics.critical_alerts }}</div>
+            <div class="metric-label">Critical Alerts</div>
+        </div>
+        <div class="metric-bar red"></div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon yellow">▲</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ metrics.high_alerts }}</div>
+            <div class="metric-label">High Alerts</div>
+        </div>
+        <div class="metric-bar yellow"></div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon blue">◎</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ "{:,}".format(metrics.unique_ips) }}</div>
+            <div class="metric-label">Unique IPs</div>
+        </div>
+        <div class="metric-bar blue"></div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon green">◉</div>
+        <div class="metric-body">
+            <div class="metric-value">{{ metrics.users_monitored }}</div>
+            <div class="metric-label">Users Monitored</div>
+        </div>
+        <div class="metric-bar green"></div>
+    </div>
+</div>
+
+<!-- Quick panels -->
+<div class="panels-row">
+    <div class="panel">
+        <div class="panel-header">
+            <span>⚑ Open Alerts</span>
+            <a href="/alerts?status=Open" class="panel-link">View All →</a>
+        </div>
+        <div class="panel-body">
+            <div class="open-alert-stat">
+                <span class="stat-number red">{{ metrics.open_alerts }}</span>
+                <span class="stat-label">Alerts require attention</span>
+            </div>
+            <div class="severity-pills">
+                <div class="pill critical">CRITICAL {{ metrics.critical_alerts }}</div>
+                <div class="pill high">HIGH {{ metrics.high_alerts }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <span>◈ Integration Status</span>
+        </div>
+        <div class="panel-body">
+            <div class="integration-item">
+                <span class="int-dot active"></span>
+                <span class="int-name">SOCVision Core</span>
+                <span class="int-status green-text">ONLINE</span>
+            </div>
+            <div class="integration-item">
+                <span class="int-dot inactive"></span>
+                <span class="int-name">NetScout</span>
+                <span class="int-status dim-text">NOT CONNECTED</span>
+            </div>
+            <div class="integration-item">
+                <span class="int-dot inactive"></span>
+                <span class="int-name">PhishGuard</span>
+                <span class="int-status dim-text">NOT CONNECTED</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <span>◻ Quick Actions</span>
+        </div>
+        <div class="panel-body quick-actions">
+            <a href="/admin/load-logs" class="qa-btn" onclick="return confirmLoad()">⟳ Reload Logs</a>
+            <a href="/analytics" class="qa-btn">◉ Analytics</a>
+            <a href="/reports" class="qa-btn">◻ Reports</a>
+            <a href="/alerts?status=Open" class="qa-btn red-btn">⚑ Open Alerts</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

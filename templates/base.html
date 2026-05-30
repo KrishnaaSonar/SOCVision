@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOCVision — Security Operations Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">⬡</div>
+                <div class="brand-text">
+                    <span class="brand-name">SOCVision</span>
+                    <span class="brand-sub">Security Operations</span>
+                </div>
+            </div>
+
+            <div class="sidebar-status">
+                <span class="status-dot pulse"></span>
+                <span>System Active</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <span class="nav-icon">◈</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/alerts" class="nav-item {% if request.endpoint == 'alerts' %}active{% endif %}">
+                    <span class="nav-icon">⚑</span>
+                    <span>Alerts</span>
+                </a>
+                <a href="/logs" class="nav-item {% if request.endpoint == 'logs' %}active{% endif %}">
+                    <span class="nav-icon">≡</span>
+                    <span>Log Viewer</span>
+                </a>
+                <a href="/analytics" class="nav-item {% if request.endpoint == 'analytics' %}active{% endif %}">
+                    <span class="nav-icon">◉</span>
+                    <span>Analytics</span>
+                </a>
+                <a href="/reports" class="nav-item {% if request.endpoint == 'reports' %}active{% endif %}">
+                    <span class="nav-icon">◻</span>
+                    <span>Reports</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="/admin/load-logs" class="load-btn" onclick="return confirmLoad()">⟳ Load Logs</a>
+                <p class="sidebar-version">v1.0.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="topbar">
+                <div class="topbar-title">
+                    {% block page_title %}SOCVision{% endblock %}
+                </div>
+                <div class="topbar-right">
+                    <span class="topbar-time" id="live-clock"></span>
+                    <span class="topbar-badge">ANALYST</span>
+                </div>
+            </header>
+
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function confirmLoad() {
+            if (confirm("Load all log files and run threat detection? This may add duplicate entries if run multiple times.")) {
+                window.location.href = "/admin/load-logs";
+            }
+            return false;
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById("live-clock").textContent =
+                now.toLocaleTimeString("en-US", { hour12: false }) +
+                " UTC";
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

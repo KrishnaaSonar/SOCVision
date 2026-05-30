@@ -1,0 +1,14 @@
+2024-01-15 11:00:00 | LOGIN_SUCCESS | user=henry | ip=192.168.3.10 | severity=INFO
+2024-01-15 11:05:00 | LOGIN_FAILED | user=ivy | ip=192.168.3.10 | severity=WARNING
+2024-01-15 11:06:00 | LOGIN_FAILED | user=jack | ip=192.168.3.10 | severity=WARNING
+2024-01-15 11:07:00 | LOGIN_FAILED | user=kate | ip=192.168.3.10 | severity=WARNING
+2024-01-15 11:08:00 | LOGIN_SUCCESS | user=liam | ip=192.168.3.11 | severity=INFO
+2024-01-15 03:10:00 | LOGIN_SUCCESS | user=mia | ip=10.0.1.50 | severity=INFO
+2024-01-16 11:00:00 | LOGIN_FAILED | user=noah | ip=172.16.1.1 | severity=WARNING
+2024-01-16 11:01:00 | LOGIN_FAILED | user=olivia | ip=172.16.1.1 | severity=WARNING
+2024-01-16 11:02:00 | LOGIN_FAILED | user=peter | ip=172.16.1.1 | severity=WARNING
+2024-01-16 11:03:00 | LOGIN_FAILED | user=quinn | ip=172.16.1.1 | severity=WARNING
+2024-01-16 11:04:00 | LOGIN_FAILED | user=rose | ip=172.16.1.1 | severity=WARNING
+2024-01-17 12:00:00 | LOGIN_SUCCESS | user=sam | ip=192.168.1.100 | severity=INFO
+2024-01-17 12:05:00 | LOGIN_SUCCESS | user=tina | ip=192.168.1.100 | severity=INFO
+2024-01-17 12:10:00 | LOGIN_SUCCESS | user=uma | ip=192.168.1.100 | severity=INFO
