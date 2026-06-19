@@ -96,17 +96,6 @@ Click **⟳ Load Logs** in the sidebar — this parses all log files, stores the
 
 ---
 
-## 🔗 Future Integrations
-
-SOCVision is designed to receive alerts from external security tools:
-
-- 🌐 **NetScout** → Open port and network scan alerts
-- 🎣 **PhishGuard** → Phishing detection alerts
-
-Both would feed into SOCVision as the central monitoring dashboard.
-
----
-
 ## 🎯 Learning Objectives Demonstrated
 
 - Flask web application development
