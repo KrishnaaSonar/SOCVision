@@ -99,7 +99,6 @@ Click **⟳ Load Logs** in the sidebar and confirm in the dialog — this parses
 - Passwords are hashed with Werkzeug's `scrypt`-based hashing — never stored or compared in plaintext
 - All routes require login; unauthenticated requests redirect to `/login`
 - The session signing key is regenerated randomly on every app restart, so logins don't persist across restarts
-- `credentials.txt` and `socvision.db` are excluded from version control via `.gitignore`
 
 ---
 
