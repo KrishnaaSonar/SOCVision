@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block page_title %}Log Viewer{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Log Viewer</h1>
+    <p class="page-subtitle">{{ total }} log entries found</p>
+</div>
+
+<div class="filter-bar">
+    <form method="get" class="filter-form">
+        <input type="text" name="search" placeholder="Search user, IP, event..." value="{{ search }}" class="filter-input">
+        <select name="severity" class="filter-select">
+            <option value="">All Severities</option>
+            <option value="INFO" {% if severity == 'INFO' %}selected{% endif %}>INFO</option>
+            <option value="WARNING" {% if severity == 'WARNING' %}selected{% endif %}>WARNING</option>
+            <option value="HIGH" {% if severity == 'HIGH' %}selected{% endif %}>HIGH</option>
+            <option value="CRITICAL" {% if severity == 'CRITICAL' %}selected{% endif %}>CRITICAL</option>
+        </select>
+        <button type="submit" class="filter-btn">Filter</button>
+        <a href="/logs" class="filter-reset">Reset</a>
+    </form>
+</div>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Timestamp</th>
+                <th>Event</th>
+                <th>User</th>
+                <th>IP Address</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td class="mono">{{ log.id }}</td>
+                <td class="mono">{{ log.timestamp }}</td>
+                <td class="mono event-cell">{{ log.event }}</td>
+                <td>{{ log.user or '—' }}</td>
+                <td class="mono">{{ log.ip or '—' }}</td>
+                <td><span class="badge badge-{{ log.severity | lower }}">{{ log.severity }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="empty-row">No logs found. Load logs first using the sidebar button.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if total_pages > 1 %}
+<div class="pagination">
+    {% if page > 1 %}
+    <a href="?page={{ page - 1 }}&search={{ search }}&severity={{ severity }}" class="page-btn">← Prev</a>
+    {% endif %}
+    <span class="page-info">Page {{ page }} of {{ total_pages }}</span>
+    {% if page < total_pages %}
+    <a href="?page={{ page + 1 }}&search={{ search }}&severity={{ severity }}" class="page-btn">Next →</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

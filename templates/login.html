@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — SOCVision</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-box { width: 320px; padding: 2rem; border: 1px solid #333; border-radius: 8px; }
+        .login-box input { width: 100%; padding: 0.6rem; margin: 0.5rem 0; box-sizing: border-box; }
+        .login-box button { width: 100%; padding: 0.6rem; margin-top: 0.5rem; }
+        .login-error { color: #e05252; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>⬡ SOCVision</h2>
+        {% if error %}<p class="login-error">{{ error }}</p>{% endif %}
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="load-btn">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>
